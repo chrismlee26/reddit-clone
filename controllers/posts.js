@@ -13,5 +13,4 @@ module.exports = (app) => {
       return res.redirect(`/`);
     })
   });
-
 };

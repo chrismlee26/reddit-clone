@@ -6,6 +6,7 @@ const url = "mongodb://localhost/reddit-db";
 mongoose.Promise = global.Promise;
 mongoose.connect(
   url,
+  { useUnifiedTopology: true },
   { useNewUrlParser: true },
   function(err, db) {
     assert.equal(null, err);
