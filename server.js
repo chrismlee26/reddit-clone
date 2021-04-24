@@ -21,7 +21,7 @@ app.set('view engine', 'handlebars');
 
 // Routes
 // app.get('/', (req, res) => {
-//     res.render('home')
+//     res.render('head')
 // });
 app.get('/posts/new', (req, res) => {
     res.render('posts-new')
