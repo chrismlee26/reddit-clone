@@ -14,7 +14,6 @@ app.use(express.urlencoded({
 app.use(expressValidator());
 
 // Middleware
-
 app.use(express.static('public'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
