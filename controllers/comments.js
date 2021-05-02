@@ -1,6 +1,5 @@
-const Post = require('../models/post');
-
-const Comment = require('../models/comments');
+const Post = require('../models/post.js');
+const Comment = require('../models/comments.js');
 
 
 module.exports = (app) => {
@@ -8,7 +7,8 @@ module.exports = (app) => {
     // INSTANTIATE INSTANCE OF COMMENTS MODEL
     const comment = new Comment(req.body);
     // SAVE INSTANCE OF COMMENTS MODEL TO DB
-    comment.save()
+    comment
+      .save()
       .then(comment => {
         // REDIRECT TO ROOT
         return Post.findById(req.params.postId);

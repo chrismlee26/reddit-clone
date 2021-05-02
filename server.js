@@ -1,7 +1,10 @@
 // Require Libraries
+require('dotenv').config()
 const express = require('express');
 const expressValidator = require('express-validator');
-const exphbs  = require('express-handlebars');
+const exphbs = require('express-handlebars');
+var cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 // App Setup
 const app = express();
@@ -12,8 +15,9 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(expressValidator());
+app.use(cookieParser());
 
-// Middleware
+// Middleware (Set Handlebars as the View Engine)
 app.use(express.static('public'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -26,6 +30,7 @@ app.get('/posts/new', (req, res) => {
 // Controllers
 require('./controllers/posts.js')(app);
 require('./controllers/comments.js')(app);
+require('./controllers/auth.js')(app);
 
 // Set db
 require('./data/reddit-db');
