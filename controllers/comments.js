@@ -5,7 +5,10 @@ const Comment = require('../models/comments.js');
 module.exports = (app) => {
   app.post('/posts/:postId/comments', (req, res) => {
     // INSTANTIATE INSTANCE OF COMMENTS MODEL
+    if (req.user) {
     const comment = new Comment(req.body);
+    comment.author = req.user._id;
+
     // SAVE INSTANCE OF COMMENTS MODEL TO DB
     comment
       .save()
@@ -24,5 +27,9 @@ module.exports = (app) => {
       .catch(err => {
         console.log(err);
       });
+    } else {
+      // UNAUTHORIZED
+      return res.status(401);
+    }
   });
 };
