@@ -22,11 +22,13 @@ module.exports = (app) => {
     // INSTANTIATE INSTANCE OF POST MODEL
     if (req.user) {
       var post = new Post(req.body);
+      post.author = req.user
     // SAVE INSTANCE OF POST MODEL TO DB
       post
         .save()
         .then(post => {
           return User.findById(req.user._id);
+
         })
         .then(user => {
           user.posts.unshift(post);
